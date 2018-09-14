@@ -1,0 +1,13 @@
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Gradle
+.gradle/
+build/
+
+# Text Files
+ASCII-COW-ART--RoseTheCow.txt
+MECHANICS--RoseTheCow.txt
