@@ -4,7 +4,6 @@ import java.util.Random;
 
 import java.util.Scanner;
 
-@SuppressWarnings("unused")
 public class VirtualPet {
 	String cowName = "Rose";
 	Scanner input = new Scanner(System.in);
@@ -87,7 +86,7 @@ public class VirtualPet {
  	public boolean feedCow() {
 		String feedChoice1 = input.nextLine();
 		String feedChoice2 = feedChoice1.toLowerCase();	
-		if (feedChoice2 == "regular" ||  feedChoice2 == "regular feed" || feedChoice2 == "1") {
+		if (feedChoice2.equals("regular") ||  feedChoice2.equals("regular feed") || feedChoice2.equals("1")) {
 			if (totalFeed >= 1) {
 				--totalFeed;
 				int randFeed = (rand.nextInt((15 - 5) + 1) + 5);
@@ -99,7 +98,7 @@ public class VirtualPet {
 				System.out.println("You don't have any regular feed!");
 				return false;
 			}
-		} else if (feedChoice2 == "fancy" || feedChoice2 == "fancy feed" || feedChoice2 == "2") {
+		} else if (feedChoice2.equals("fancy") || feedChoice2.equals("fancy feed") || feedChoice2.equals("2")) {
 			if (totalFancyFeed >= 1) {
 				--totalFancyFeed;
 				int randFancyFeed = (rand.nextInt((60 - 30) + 1) + 30);
@@ -201,11 +200,12 @@ public class VirtualPet {
 	
 	// Buy food or water at the market
 	public boolean buyAtMarket() {
-		System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-		String marketInput1 = input.nextLine();
-		String marketInput2 = marketInput1.toLowerCase();
-		while (marketInput2 != "4" || marketInput2 != "leave" || marketInput2 != "leave market") {
-			if (marketInput2 == "1" || marketInput2 == "buy water" || marketInput2 == "water") {
+		int exitMarketLoop = 0;
+		while (exitMarketLoop < 1) {
+			System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
+			String marketInput1 = input.nextLine();
+			String marketInput2 = marketInput1.toLowerCase();
+			if (marketInput2.equals("1") || marketInput2.equals("buy water") || marketInput2.equals("water")) {
 				System.out.print("How many units of water would you like to buy?\n> ");
 				int waterWanted = input.nextInt();
 				if ((waterWanted * 5) > currentMoney) {
@@ -216,10 +216,7 @@ public class VirtualPet {
 					limit();
 					System.out.println("You now have " + waterTrough + " units of water\nRemember, your trough can hold up to 40 units at a time");
 				}
-				System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-				marketInput1 = input.nextLine();
-				marketInput2 = marketInput1.toLowerCase();
-			} else if (marketInput2 == "2" || marketInput2 == "buy regular feed" || marketInput2 == "regular feed" || marketInput2 == "regular") {
+			} else if (marketInput2.equals("2") || marketInput2.equals("buy regular feed") || marketInput2.equals("regular feed") || marketInput2.equals("regular")) {
 				System.out.print("How many bags of regular feed would you like to buy?\n> ");
 				int feedWanted = input.nextInt();
 				if ((feedWanted * 20) > currentMoney) {
@@ -230,10 +227,7 @@ public class VirtualPet {
 					limit();
 					System.out.println("You now have " + totalFeed + " bags of fancy feed\nRemember, your barn can hold up to 15 regular bags at a time");
 				}
-				System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-				marketInput1 = input.nextLine();
-				marketInput2 = marketInput1.toLowerCase();
-			} else if (marketInput2 == "3" || marketInput2 == "buy fancy feed" || marketInput2 == "fancy feed" || marketInput2 == "fancy") {
+			} else if (marketInput2.equals("3") || marketInput2.equals("buy fancy feed") || marketInput2.equals("fancy feed") || marketInput2.equals("fancy")) {
 				System.out.print("How many bags of fancy feed would you like to buy?\n> ");
 				int fancyFeedWanted = input.nextInt();
 				if ((fancyFeedWanted * 50) > currentMoney) {
@@ -244,21 +238,13 @@ public class VirtualPet {
 					limit();
 					System.out.println("You now have " + totalFancyFeed + " bags of fancy feed\nRemember, your barn can hold up to 5 fancy bags at a time");
 				}
-				System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-				marketInput1 = input.nextLine();
-				marketInput2 = marketInput1.toLowerCase();
-			} else if (marketInput2 == "feed") {
+			} else if (marketInput2.equals("feed")) {
 				System.out.println("What type of feed?");
-				System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-				marketInput1 = input.nextLine();
-				marketInput2 = marketInput1.toLowerCase();
-			} else if (marketInput2 == "4" || marketInput2 == "leave market" || marketInput2 == "leave") {
+			} else if (marketInput2.equals("4") || marketInput2.equals("leave market") || marketInput2.equals("leave")) {
 				System.out.println("Goodbye!");
+				++exitMarketLoop;
 			} else {
 				System.out.println("Sorry, I didn't understand that");
-				System.out.print("What would you like to do?\n1) Buy Water ($5 each)\n2) Buy Regular Feed ($20 each)\n3) Buy Fancy Feed ($50 each)\n4) Leave Market\n> ");
-				marketInput1 = input.nextLine();
-				marketInput2 = marketInput1.toLowerCase();
 			}
 		}
 		if (dayTime) {

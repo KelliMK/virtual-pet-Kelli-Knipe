@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 @SuppressWarnings("unused")
 public class VirtualPetApp {
-	@SuppressWarnings("unused")
-	public void main(String args[]) {
+	public static void main(String args[]) {
 		String cowName = "Rose";
 		Scanner input = new Scanner(System.in);
 		Random rand = new Random();
@@ -29,52 +28,86 @@ public class VirtualPetApp {
 		int randSales = rand.nextInt((35 - 15) + 1) + 15;	// Sales of Milk
 		System.out.println("Welcome to Virtual Pet Rose!\nby Kelli Knipe\nASCII art by Christopher Johnson");
 		String userInput = " ";
-		VirtualPet Rose = new VirtualPet("Rose");
+		VirtualPet Rose = new VirtualPet(cowName);
+		
+		
+		
 		while (userInput.toLowerCase() != "exit" || userInput != "9") {
+			
 			Rose.calculateMood();
 			Rose.moodGraphic();
-			System.out.print("\n1) Display Stats (stats)\n2) Feed " + cowName + " (feed)\n3) Water " + cowName + " (water)\n4) Play with " + cowName + " (play)\n5) Pet " + cowName + " (pet)\n6) Milk " + cowName + " (milk)\n7) Go to the Market (market)\n8) Do Nothing (nope)\n9) Exit Game (exit)\n> ");
-			userInput = input.nextLine();
-			if (userInput.toLowerCase() == "stats" || userInput == "1") {
+			System.out.println("Choose an option\n1) Display Stats (stats)\n2) Feed " + cowName + " (feed)\n3) Water " + cowName + " (water)\n4) Play with " + cowName + " (play)\n5) Pet " + cowName + " (pet)\n6) Milk " + cowName + " (milk)\n7) Go to the Market (market)\n8) Do Nothing (nope)\n9) Exit Game (exit)");
+			System.out.print("> ");
+			String userInput1 = input.nextLine();
+			System.out.println(" ");
+			
+			
+			if (userInput1.equals("stats") || userInput1.equals("1")) {
 				System.out.println(Rose.cowName + "'s Hunger: " + Rose.cowHunger + "/100");
 				System.out.println(Rose.cowName + "'s Thirst: " + Rose.cowThirst + "/50");
 				System.out.println(Rose.cowName + "'s Boredom: " + Rose.cowBoredom + "/50");
 				System.out.println(Rose.cowName + "'s Milk: " + Rose.cowMilk + "/30");
 				System.out.println(Rose.cowName + "'s Energy: " + (3 - Rose.cowTired) + "/3");
-			} else if (userInput.toLowerCase() == "feed" || userInput == "2") {
+			
+			
+			} else if (userInput1.equals("feed") || userInput1.equals("2")) {
 				System.out.println("You currently have:\nFeed: " + totalFeed + "\nFancy Feed: " + totalFancyFeed);	// Start cut here
 				System.out.println("Would you like to feed " + cowName + " regular (1) or fancy (2) feed?");
 				System.out.print("> ");
 				Rose.feedCow();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "water" || userInput == "3") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("water") || userInput1.equals("3")) {
 				Rose.waterCow();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "play" || userInput == "4") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("play") || userInput1.equals("4")) {
 				Rose.playCow();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "pet" || userInput == "5") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("pet") || userInput1.equals("5")) {
 				Rose.petCow();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "milk" || userInput == "6") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("milk") || userInput1.equals("6")) {
 				Rose.milkCow();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "market" || userInput == "7") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("market") || userInput1.equals("7")) {
 				Rose.goToMarket();
 				Rose.buyAtMarket();
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "nope" || userInput == "8") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("nope") || userInput1.equals("8")) {
 				System.out.println("Okay, lazy");
 				Rose.tick();
 				Rose.drain();
-			} else if (userInput.toLowerCase() == "exit" || userInput == "9") {
+				Rose.limit();
+			
+			
+			} else if (userInput1.equals("exit") || userInput1.equals("9")) {
 				System.out.println("Thanks for playing!");
+				userInput = "exit";
+			
+			
 			} else {
 				System.out.println("...I didn't catch that. Enter a non-zero integer or one of the commands in parentheses");
 			}
